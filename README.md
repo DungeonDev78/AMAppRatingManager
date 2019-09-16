@@ -2,6 +2,9 @@
 
 Manage when and when to present to your users the Rating in App popup in order to increase the total rating of your App.
 
+![Image description](https://github.com/DungeonDev78/AMAppRatingManager/blob/master/example001.jpg?raw=true)
+
+
 ## Installation
 
 In the source folder you will find the AMAppRatingManager.swift file. Just copy it in your project.
