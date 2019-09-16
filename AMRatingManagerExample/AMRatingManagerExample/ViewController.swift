@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func addPointsButtonPressed(_ sender: UIButton) {
-        AMAppRatingManager.addSuccessPoints(sender.tag)
+        AMAppRatingManager.addXPPoints(sender.tag)
         checkRatingManager()
         updateLabel()
     }
@@ -54,7 +54,7 @@ private extension ViewController {
             details += "\nRating managed showed on \(AMAppRatingManager.getLastTestedDate())\nApp version: \(AMAppRatingManager.getLastTestedAppVersion())"
         }
 
-        lblTotalPoints.text = "Total points: \(AMAppRatingManager.getActualPoints())"
+        lblTotalPoints.text = "Total points: \(AMAppRatingManager.getActualXPPoints())"
         lblAppDetail.text = details
     }
 }

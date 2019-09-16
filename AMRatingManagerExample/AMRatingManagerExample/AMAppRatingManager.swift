@@ -23,12 +23,12 @@ final class AMAppRatingManager {
     fileprivate struct AZAppRatingConstants {
         static let LastDateCheckedKey           = "LastDateCheckedKey"
         static let TestedAppVersionKey          = "TestedAppVersionKey"
-        static let ActualPointsKey              = "ActualPointsKey"
+        static let ActualXPPointsKey            = "ActualXPPointsKey"
         static let ShouldShowRatingManagerKey   = "ShouldShowRatingManagerKey"
     }
 
     static fileprivate let defaults = UserDefaults.standard
-    static fileprivate let minimumPointsNeeded = 100       // Example: 100
+    static fileprivate let minimumXPPointsNeeded = 100       // Example: 100
     static fileprivate let minimumMonths = 4               // Set to 4 in order to show the panel max 3 times per year
     // FIXME: SET TO FALSE IN PRODUCION!!!
     static fileprivate let isTest = false                  // SET TO FALSE IN PRODUCTION!!!
@@ -76,10 +76,10 @@ final class AMAppRatingManager {
         viewController.present(alert, animated: true)
     }
 
-    /// Add the numbers of "success points". It's needed in order to test if the Rating should be presented or not.
-    static func addSuccessPoints(_ points:Int) {
-        let successes = getActualPoints()
-        setActualPoints(successes + points)
+    /// Add the numbers of "experience points". It's needed in order to test if the Rating should be presented or not.
+    static func addXPPoints(_ points:Int) {
+        let successes = getActualXPPoints()
+        setActualXPPoints(successes + points)
     }
 
     // MARK: - "Remote" activation
@@ -109,8 +109,8 @@ private extension AMAppRatingManager {
             // Check if the actual App version number is different from the last tested version
             guard getLastTestedAppVersion() != Bundle.main.appCurrentVersion else { return false }
 
-            // Check if the actual success points are equal or bigger than what needed
-            guard getActualPoints() >= minimumPointsNeeded else { return false }
+            // Check if the actual xp points are equal or bigger than what needed
+            guard getActualXPPoints() >= minimumXPPointsNeeded else { return false }
 
             let now = Foundation.Date()
             let calendar = Calendar.current
@@ -147,7 +147,7 @@ private extension AMAppRatingManager {
     static func updateNewStatus() {
         setTodayAsLatestTestedDate()
         setCurrentVersionNumberAsLastTested()
-        setActualPoints(0)
+        setActualXPPoints(0)
     }
 }
 
@@ -190,15 +190,15 @@ extension AMAppRatingManager {
     /// Save the number of success occurrences of the control event needed to show the popup.
     ///
     /// - Parameter value: the Int to set
-    private static func setActualPoints(_ value: Int) {
-        defaults.set(value, forKey: AZAppRatingConstants.ActualPointsKey)
+    private static func setActualXPPoints(_ value: Int) {
+        defaults.set(value, forKey: AZAppRatingConstants.ActualXPPointsKey)
     }
 
-    /// Get the number of success occurrences of the control event needed to show the popup.
+    /// Get the earned xp points.
     ///
-    /// - Returns: the needed Int
-    static func getActualPoints() -> Int {
-        return defaults.integer(forKey: AZAppRatingConstants.ActualPointsKey)
+    /// - Returns: the actual xp points as Int
+    static func getActualXPPoints() -> Int {
+        return defaults.integer(forKey: AZAppRatingConstants.ActualXPPointsKey)
     }
 }
 
