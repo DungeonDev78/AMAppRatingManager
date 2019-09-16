@@ -7,7 +7,7 @@ Manage when and when to present to your users the Rating in App popup in order t
 In the source folder you will find the AMAppRatingManager.swift file. Just copy it in your project.
 
 ## Usage
-In order to present the Rating Controller, the user must earn 100 experience points.
+In order to present the Rating Controller, the user must earn 100 *experience points*.
 
 ## Author
 
